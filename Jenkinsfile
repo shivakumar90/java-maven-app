@@ -1,3 +1,4 @@
+@Library('jenkins-shared-library')
 def gv
 
 pipeline {
@@ -12,11 +13,6 @@ pipeline {
             }
         }
         stage("init") {
-            when {
-                expression {
-                    BRANCH_NAME == "main"
-                }
-            }
             steps {
                 script {
                     gv = load "script.groovy"
@@ -24,37 +20,27 @@ pipeline {
             }
         }
         stage("build jar") {
-            when {
-                expression {
-                    BRANCH_NAME == "main"
-                }
-            }
+            
             steps {
                 script {
                     echo "building jar"
+                    buildJar()
                     //gv.buildJar()
                 }
             }
         }
         stage("build image") {
-            when {
-                expression {
-                    BRANCH_NAME == "main"
-                }
-            }
+            
             steps {
                 script {
                     echo "building image"
+                    buildImage()
                     //gv.buildImage()
                 }
             }
         }
         stage("deploy") {
-            when {
-                expression {
-                    BRANCH_NAME == "main"
-                }
-            }
+            
             steps {
                 script {
                     echo "deploying"
