@@ -37,7 +37,7 @@ pipeline {
             steps {
                 script {
                     echo "building image"
-                    buildImage()
+                    buildImage("shivakumarreddy1/demo-app:jma-4.0")
                     //gv.buildImage()
                 }
             }
