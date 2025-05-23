@@ -51,7 +51,7 @@ pipeline {
             steps {
                 script {
                     
-                    echo "deploying"
+                    echo "deploying..."
                     //def dockerCmd = "docker run -d -p3000:3080 shivakumarreddy1/demo-app:react-nodejs"
                     def dockerComposeCmd = "docker-compose -f docker-compose.yaml up -d"
                     def shellCmds = "bash ./server-cmds.sh"
