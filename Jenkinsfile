@@ -56,8 +56,8 @@ pipeline {
                     def dockerComposeCmd = "docker-compose -f docker-compose.yaml up -d"
                     def shellCmds = "bash ./server-cmds.sh"
                     sshagent(['awskey']) {
-                        sh "scp server-cmds.sh ${AWS_HOST}:/home/ec2-user"
-                        sh "scp docker-compose.yaml ${AWS_HOST}:/home/ec2-user"
+                        sh "scp -o StrictHostKeyChecking=no server-cmds.sh ${AWS_HOST}:/home/ec2-user"
+                        sh "scp -o StrictHostKeyChecking=no docker-compose.yaml ${AWS_HOST}:/home/ec2-user"
                         sh "ssh -o StrictHostKeyChecking=no ${AWS_HOST} ${shellCmds}"
                         // sh "ssh -o StrictHostKeyChecking=no ${AWS_HOST} docker-compose --version"
                     }
