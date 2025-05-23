@@ -8,7 +8,7 @@ pipeline {
     }
     environment {
         IMAGE_NAME = "shivakumarreddy1/demo-app:jma-4.0"
-        AWS_HOST = "ec2-user@ec2-35-154-211-37.ap-south-1.compute.amazonaws.com"
+        AWS_HOST = "ec2-user@ec2-13-203-223-210.ap-south-1.compute.amazonaws.com"
     }
     stages {
         stage ("test") {
