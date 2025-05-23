@@ -1,7 +1,15 @@
+@Library('jenkins-shared-library')_
 def gv
 
 pipeline {
     agent any
+    tools {
+        maven "maven 3.9.9"
+    }
+    environment {
+        IMAGE_NAME = "shivakumarreddy1/demo-app:jma-4.0"
+        AWS_HOST = "ec2-user@ec2-35-154-211-37.ap-south-1.compute.amazonaws.com"
+    }
     stages {
         stage ("test") {
             steps {
@@ -19,9 +27,11 @@ pipeline {
             }
         }
         stage("build jar") {
+            
             steps {
                 script {
                     echo "building jar"
+                    buildJar()
                     //gv.buildJar()
                 }
             }
@@ -31,6 +41,7 @@ pipeline {
             steps {
                 script {
                     echo "building image"
+                    buildImage(env.IMAGE_NAME)
                     //gv.buildImage()
                 }
             }
