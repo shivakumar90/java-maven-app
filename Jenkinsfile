@@ -6,6 +6,10 @@ pipeline {
     tools {
         maven "maven 3.9.9"
     }
+    environment {
+        IMAGE_NAME = "shivakumarreddy1/demo-app:jma-4.0"
+        AWS_HOST = "ec2-user@ec2-35-154-211-37.ap-south-1.compute.amazonaws.com"
+    }
     stages {
         stage ("test") {
             steps {
@@ -47,6 +51,10 @@ pipeline {
             steps {
                 script {
                     echo "deploying"
+                    def dockerCmd = "docker run -d -p8080:8080 ${IMAGE_NAME}"
+                    sshagent(['awskey']) {
+                        sh "ssh -o StrictHostKeyChecking=no ${AWS_HOST} ${dockerCmd}"
+                    }
                     //gv.deployApp()
                 }
             }
