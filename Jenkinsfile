@@ -12,11 +12,6 @@ pipeline {
             }
         }
         stage("init") {
-            when {
-                expression {
-                    BRANCH_NAME == "main"
-                }
-            }
             steps {
                 script {
                     gv = load "script.groovy"
@@ -24,11 +19,6 @@ pipeline {
             }
         }
         stage("build jar") {
-            when {
-                expression {
-                    BRANCH_NAME == "main"
-                }
-            }
             steps {
                 script {
                     echo "building jar"
@@ -37,11 +27,7 @@ pipeline {
             }
         }
         stage("build image") {
-            when {
-                expression {
-                    BRANCH_NAME == "main"
-                }
-            }
+            
             steps {
                 script {
                     echo "building image"
@@ -50,11 +36,7 @@ pipeline {
             }
         }
         stage("deploy") {
-            when {
-                expression {
-                    BRANCH_NAME == "main"
-                }
-            }
+            
             steps {
                 script {
                     echo "deploying"
