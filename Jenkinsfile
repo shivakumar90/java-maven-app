@@ -41,7 +41,7 @@ pipeline {
             steps {
                 script {
                     echo "building image"
-                    buildImage("shivakumarreddy1/demo-app:jma-4.0")
+                    buildImage(env.IMAGE_NAME)
                     //gv.buildImage()
                 }
             }
@@ -52,9 +52,10 @@ pipeline {
                 script {
                     echo "deploying"
                     def dockerCmd = "docker run -d -p8080:8080 ${IMAGE_NAME}"
-                    sshagent(['awskey']) {
-                        sh "ssh -o StrictHostKeyChecking=no ${AWS_HOST} ${dockerCmd}"
-                    }
+                    deployToAWS(env.AWS_HOST, $dockerCmd)
+                    // sshagent(['awskey']) {
+                    //     sh "ssh -o StrictHostKeyChecking=no ${AWS_HOST} ${dockerCmd}"
+                    // }
                     //gv.deployApp()
                 }
             }
