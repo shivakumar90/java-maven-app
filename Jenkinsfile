@@ -52,7 +52,7 @@ pipeline {
                 script {
                     echo "deploying"
                     def dockerCmd = "docker run -d -p8080:8080 ${IMAGE_NAME}"
-                    deployToAWS(env.AWS_HOST, $dockerCmd)
+                    deployToAWS(env.AWS_HOST, dockerCmd)
                     // sshagent(['awskey']) {
                     //     sh "ssh -o StrictHostKeyChecking=no ${AWS_HOST} ${dockerCmd}"
                     // }
