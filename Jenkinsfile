@@ -54,7 +54,7 @@ pipeline {
                     //def dockerCmd = "docker run -d -p3000:3080 shivakumarreddy1/demo-app:react-nodejs"
                     def dockerComposeCmd = "docker-compose -f docker-compose.yaml up -d"
                     sshagent(['awskey']) {
-                        sh "ssh docker-compose.yaml ec2-user@ec2-35-154-211-37.ap-south-1.compute.amazonaws.com:/home/ec2-user"
+                        sh "scp docker-compose.yaml ec2-user@ec2-35-154-211-37.ap-south-1.compute.amazonaws.com:/home/ec2-user"
                         sh "ssh -o StrictHostKeyChecking=no ec2-user@ec2-35-154-211-37.ap-south-1.compute.amazonaws.com ${dockerComposeCmd}"
                     }
                     //gv.deployApp()
