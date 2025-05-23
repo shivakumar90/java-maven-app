@@ -55,12 +55,13 @@ pipeline {
                     //def dockerCmd = "docker run -d -p3000:3080 shivakumarreddy1/demo-app:react-nodejs"
                     def dockerComposeCmd = "docker-compose -f docker-compose.yaml up -d"
                     sshagent(['awskey']) {
-                        def host = AWS_HOST.split('@')[1]
+                        // def host = AWS_HOST.split('@')[1]
                     
-                        // Add EC2 host key to Jenkins container's known_hosts
-                        sh "mkdir -p ~/.ssh && ssh-keyscan -H ${host} >> ~/.ssh/known_hosts"
-                        sh "scp docker-compose.yaml ${AWS_HOST}:/home/ec2-user"
-                        sh "ssh -o StrictHostKeyChecking=no ${AWS_HOST} ${dockerComposeCmd}"
+                        // // Add EC2 host key to Jenkins container's known_hosts
+                        // sh "mkdir -p ~/.ssh && ssh-keyscan -H ${host} >> ~/.ssh/known_hosts"
+                        // sh "scp docker-compose.yaml ${AWS_HOST}:/home/ec2-user"
+                        // sh "ssh -o StrictHostKeyChecking=no ${AWS_HOST} ${dockerComposeCmd}"
+                        sh "ssh -o StrictHostKeyChecking=no ${AWS_HOST} docker-compose --version"
                     }
                     //gv.deployApp()
                 }
