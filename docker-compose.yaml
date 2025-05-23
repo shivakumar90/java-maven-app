@@ -1,0 +1,11 @@
+services:
+  java-maven-app:
+    image: shivakumarreddy1/demo-app:jma-4.0
+    ports:
+      - 8080:8080
+  postgres:
+    image: postgres:15
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=pass
