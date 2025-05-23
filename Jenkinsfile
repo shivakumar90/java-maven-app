@@ -40,6 +40,10 @@ pipeline {
             steps {
                 script {
                     echo "deploying"
+                    def dockerCmd = "docker run -d -p3000:3080 shivakumarreddy1/demo-app:react-nodejs"
+                    sshagent(['awskey']) {
+                        sh "ssh -o StrictHostKeyChecking=no ec2-user@ec2-35-154-211-37.ap-south-1.compute.amazonaws.com ${dockerCmd}"
+                    }
                     //gv.deployApp()
                 }
             }
